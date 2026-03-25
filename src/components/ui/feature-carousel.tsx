@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
+import { useLenis } from "lenis/react";
 import {
   Pizza04Icon,
   CommandFreeIcons,
@@ -75,6 +76,7 @@ const ITEM_HEIGHT = 58;
 const SCROLL_STEP_COOLDOWN = 420;
 
 export function FeatureCarousel() {
+  const lenis = useLenis();
   const [step, setStep] = useState(0);
   const [isMobileView, setIsMobileView] = useState(false);
   const sectionRef = useRef<HTMLElement | null>(null);
@@ -109,6 +111,35 @@ export function FeatureCarousel() {
     return true;
   };
 
+  const skipPastStickyBoundary = (direction: "up" | "down") => {
+    if (!sectionRef.current) return;
+
+    const rect = sectionRef.current.getBoundingClientRect();
+
+    if (direction === "down") {
+      const remaining = rect.bottom - window.innerHeight;
+      if (remaining > 0) {
+        const targetY = window.scrollY + remaining + 2;
+        if (lenis) {
+          lenis.scrollTo(targetY, { immediate: true });
+        } else {
+          window.scrollBy({ top: remaining + 2, behavior: "auto" });
+        }
+      }
+      return;
+    }
+
+    const overshootTop = -rect.top;
+    if (overshootTop > 0) {
+      const targetY = Math.max(0, window.scrollY - (overshootTop + 2));
+      if (lenis) {
+        lenis.scrollTo(targetY, { immediate: true });
+      } else {
+        window.scrollBy({ top: -(overshootTop + 2), behavior: "auto" });
+      }
+    }
+  };
+
   useEffect(() => {
     if (isMobileView) return;
 
@@ -117,11 +148,13 @@ export function FeatureCarousel() {
 
       // At last feature, scrolling down exits carousel
       if (event.deltaY > 0 && currentIndex >= lastIndex) {
+        skipPastStickyBoundary("down");
         return; // Allow natural page scroll
       }
 
       // At first feature, scrolling up exits carousel
       if (event.deltaY < 0 && currentIndex <= 0) {
+        skipPastStickyBoundary("up");
         return; // Allow natural page scroll
       }
 
@@ -140,7 +173,7 @@ export function FeatureCarousel() {
 
     window.addEventListener("wheel", onWheel, { passive: false });
     return () => window.removeEventListener("wheel", onWheel);
-  }, [currentIndex, isMobileView, lastIndex]);
+  }, [currentIndex, isMobileView, lastIndex, lenis]);
 
   const handleTouchStart = (event: React.TouchEvent<HTMLElement>) => {
     touchStartYRef.current = event.touches[0]?.clientY ?? null;
@@ -159,11 +192,13 @@ export function FeatureCarousel() {
 
     // At last feature, touch scroll down exits carousel
     if (deltaY > 0 && currentIndex >= lastIndex) {
+      skipPastStickyBoundary("down");
       return; // Allow natural page scroll
     }
 
     // At first feature, touch scroll up exits carousel
     if (deltaY < 0 && currentIndex <= 0) {
+      skipPastStickyBoundary("up");
       return; // Allow natural page scroll
     }
 

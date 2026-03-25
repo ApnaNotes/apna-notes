@@ -17,6 +17,7 @@ import { PricingSection } from "@/components/ui/pricing-section";
 import { Footer } from "@/components/ui/footer-section";
 import FAQs from "@/components/ui/text-reveal-faqs";
 import LoginPage from "@/components/ui/login-card";
+import SmoothScrolling from "@/components/ui/smooth-scrolling";
 import { AnimatePresence, motion } from "motion/react";
 import { useState } from "react";
 
@@ -49,8 +50,9 @@ export default function HomePageSections() {
   };
 
   return (
-    <div className="relative w-full">
-      <Navbar>
+    <SmoothScrolling>
+      <div className="relative w-full">
+        <Navbar>
         <NavBody>
           <NavbarLogo />
           <NavItems items={navItems} />
@@ -106,48 +108,49 @@ export default function HomePageSections() {
             </div>
           </MobileNavMenu>
         </MobileNav>
-      </Navbar>
+        </Navbar>
 
-      {/* Hero: headline + subheadline + CTA */}
-      <GlowyWavesHero />
+        {/* Hero: headline + subheadline + CTA */}
+        <GlowyWavesHero />
 
-      {/* Feature section: animated carousel */}
-      <FeatureCarousel />
+        {/* Feature section: animated carousel */}
+        <FeatureCarousel />
 
-      {/* How Senior Connect works: 3 steps */}
-      <FeaturesSection />
+        {/* How Senior Connect works: 3 steps */}
+        <FeaturesSection />
 
-      {/* Recharge pricing table with free-trial context */}
-      <PricingSection />
+        {/* Recharge pricing table with free-trial context */}
+        <PricingSection />
 
-      {/* Frequently asked questions with text-reveal accordion */}
-      <FAQs />
+        {/* Frequently asked questions with text-reveal accordion */}
+        <FAQs />
 
-      {/* Footer with product/company/resources/social links */}
-      <Footer />
+        {/* Footer with product/company/resources/social links */}
+        <Footer />
 
-      <AnimatePresence>
-        {isAuthModalOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setIsAuthModalOpen(false)}
-            className="fixed inset-0 z-[120] flex items-center justify-center bg-black/60 p-4 backdrop-blur-md"
-          >
+        <AnimatePresence>
+          {isAuthModalOpen && (
             <motion.div
-              initial={{ opacity: 0, scale: 0.96, y: 10 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.98, y: 8 }}
-              transition={{ duration: 0.2, ease: "easeOut" }}
-              onClick={(event) => event.stopPropagation()}
-              className="relative w-full max-w-md"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsAuthModalOpen(false)}
+              className="fixed inset-0 z-120 flex items-center justify-center bg-black/60 p-4 backdrop-blur-md"
             >
-              <LoginPage compact onClose={() => setIsAuthModalOpen(false)} />
+              <motion.div
+                initial={{ opacity: 0, scale: 0.96, y: 10 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.98, y: 8 }}
+                transition={{ duration: 0.2, ease: "easeOut" }}
+                onClick={(event) => event.stopPropagation()}
+                className="relative w-full max-w-md"
+              >
+                <LoginPage compact onClose={() => setIsAuthModalOpen(false)} />
+              </motion.div>
             </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
+          )}
+        </AnimatePresence>
+      </div>
+    </SmoothScrolling>
   );
 }
