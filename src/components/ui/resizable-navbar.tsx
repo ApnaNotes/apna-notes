@@ -48,11 +48,7 @@ interface MobileNavMenuProps {
 }
 
 export const Navbar = ({ children, className }: NavbarProps) => {
-    const ref = useRef<HTMLDivElement>(null);
-    const { scrollY } = useScroll({
-        target: ref,
-        offset: ["start start", "end start"],
-    });
+    const { scrollY } = useScroll();
     const [visible, setVisible] = useState<boolean>(false);
     const lastScrollRef = useRef(0);
     const isMobileRef = useRef(false);
@@ -87,7 +83,6 @@ export const Navbar = ({ children, className }: NavbarProps) => {
 
     return (
         <motion.div
-            ref={ref}
             className={cn("sticky inset-x-0 top-4 z-40 w-full", className)}
         >
             {React.Children.map(children, (child) =>
@@ -259,6 +254,7 @@ export const NavbarLogo = () => {
                 width={260}
                 height={76}
                 priority
+                style={{ width: "auto" }}
                 className="hidden h-9 w-auto object-contain dark:hidden md:block md:h-10 lg:h-11"
             />
             <Image
@@ -267,6 +263,7 @@ export const NavbarLogo = () => {
                 width={260}
                 height={76}
                 priority
+                style={{ width: "auto" }}
                 className="hidden h-9 w-auto object-contain dark:hidden md:dark:block md:h-10 lg:h-11"
             />
         </a>

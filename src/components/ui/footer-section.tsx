@@ -67,6 +67,7 @@ export function Footer() {
             alt="ApnaNotes"
             width={120}
             height={40}
+            style={{ width: 'auto' }}
             className="block h-10 w-auto dark:hidden"
           />
           <Image
@@ -74,6 +75,7 @@ export function Footer() {
             alt="ApnaNotes"
             width={120}
             height={40}
+            style={{ width: 'auto' }}
             className="hidden h-10 w-auto dark:block"
           />
           <p className="text-muted-foreground mt-8 text-sm md:mt-0">
