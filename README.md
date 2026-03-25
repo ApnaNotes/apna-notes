@@ -1,36 +1,29 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ApnaNotes
 
-## Getting Started
+ApnaNotes is a modern student-first learning platform concept focused on helping aspirants study smarter, faster, and with more clarity.
 
-First, run the development server:
+It blends curated notes, exam-focused guidance, and mentor connection into one clean experience designed for learners preparing for competitive exams.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## What It Represents
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- A single place for notes, PYQs, and quick revision resources
+- Mentor-led support through short, practical guidance sessions
+- A mobile-friendly, distraction-light interface built for consistency
+- Clear learning paths for exams like UPSC, JEE, NEET, and Boards
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Product Direction
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+ApnaNotes is crafted as a focused education product, where the interface stays simple, the content stays practical, and every section is designed around student outcomes.
 
-## Learn More
+## Built With
 
-To learn more about Next.js, take a look at the following resources:
+- Next.js
+- React
+- Tailwind CSS
+- Framer Motion / Motion
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Brand
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+ApnaNotes
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Learn with clarity. Move with confidence.

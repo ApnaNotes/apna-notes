@@ -2,9 +2,14 @@
 
 import { useState } from 'react';
 import { motion, easeOut } from 'framer-motion';
-import { MoveRight } from 'lucide-react';
+import { MoveRight, X } from 'lucide-react';
 
-export default function LoginPage() {
+interface LoginPageProps {
+  compact?: boolean;
+  onClose?: () => void;
+}
+
+export default function LoginPage({ compact = false, onClose }: LoginPageProps) {
   const [email, setEmail] = useState('');
 
   const containerVariants = {
@@ -36,14 +41,32 @@ export default function LoginPage() {
   };
 
   return (
-    <div className=" w-full min-h-screen">
-      <div className="relative min-h-screen z-10 flex items-center justify-center p-4">
+    <div className={compact ? "w-full" : "w-full min-h-screen"}>
+      <div
+        className={
+          compact
+            ? "relative z-10 flex items-center justify-center"
+            : "relative min-h-screen z-10 flex items-center justify-center p-4"
+        }
+      >
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="w-full max-w-md"
+          className="w-full max-w-md relative"
         >
+          {onClose && (
+            <motion.button
+              onClick={onClose}
+              className="absolute -top-4 -right-4 z-[100] rounded-full border border-white/20 bg-black/70 p-2 text-white transition-colors hover:bg-red-500/20 hover:text-red-500"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              aria-label="Close login modal"
+            >
+              <X className="w-6 h-6" />
+            </motion.button>
+          )}
+
           <motion.div
             variants={itemVariants}
             className="bg-white dark:bg-[#3F3F3F] backdrop-blur-xl border border-white/10 rounded-3xl p-8 shadow-2xl "
@@ -84,32 +107,13 @@ export default function LoginPage() {
                 className="w-full bg-gray-100 dark:bg-[#1B1B1B] border border-gray-300 dark:border-white/20 rounded-full px-6 py-4 text-gray-900 dark:text-white flex items-center justify-between hover:bg-gray-200 dark:hover:bg-black/60 transition-colors group"
               >
                 <div className="flex items-center">
-                  <div className="w-5 h-5 mr-3">
-                    <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
-                      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-                    </svg>
-                  </div>
-                  <span>Continue with Twitter</span>
-                </div>
-                <MoveRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </motion.button>
-
-              <motion.button
-                variants={buttonVariants}
-                whileHover="hover"
-                whileTap="tap"
-                className="w-full bg-gray-100 dark:bg-[#1B1B1B] border border-gray-300 dark:border-white/20 rounded-full px-6 py-4 text-gray-900 dark:text-white flex items-center justify-between hover:bg-gray-200 dark:hover:bg-black/60 transition-colors group"
-              >
-                <div className="flex items-center">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 30 30"
-                    fill="currentColor"
-                    className="w-5 h-5 mr-3"
-                  >
-                    <path d="M25.565,9.785c-0.123,0.077-3.051,1.702-3.051,5.305c0.138,4.109,3.695,5.55,3.756,5.55 c-0.061,0.077-0.537,1.963-1.947,3.94C23.204,26.283,21.962,28,20.076,28c-1.794,0-2.438-1.135-4.508-1.135 c-2.223,0-2.852,1.135-4.554,1.135c-1.886,0-3.22-1.809-4.4-3.496c-1.533-2.208-2.836-5.673-2.882-9 c-0.031-1.763,0.307-3.496,1.165-4.968c1.211-2.055,3.373-3.45,5.734-3.496c1.809-0.061,3.419,1.242,4.523,1.242 c1.058,0,3.036-1.242,5.274-1.242C21.394,7.041,23.97,7.332,25.565,9.785z M15.001,6.688c-0.322-1.61,0.567-3.22,1.395-4.247 c1.058-1.242,2.729-2.085,4.17-2.085c0.092,1.61-0.491,3.189-1.533,4.339C18.098,5.937,16.488,6.872,15.001,6.688z" />
+                  <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 mr-3">
+                    <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                    <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                    <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+                    <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
                   </svg>
-                  <span>Continue with Apple</span>
+                  <span>Continue with Google</span>
                 </div>
                 <MoveRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </motion.button>
