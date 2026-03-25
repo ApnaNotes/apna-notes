@@ -6,8 +6,6 @@ import {
   Pizza04Icon,
   CommandFreeIcons,
   GlobalSearchIcon,
-  AiCloudIcon,
-  SmartPhone01Icon,
   CheckmarkCircle01Icon,
   DashboardSquare01Icon,
   MagicWandIcon,
@@ -25,6 +23,24 @@ const FEATURES = [
       "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?q=80&w=1200",
     description:
       "Curated notes, PYQs, and quick revision sheets for UPSC, JEE, NEET, and Boards.",
+  },
+  {
+    id: "study-material",
+    label: "Study Material",
+    icon: MagicWandIcon,
+    image:
+      "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?q=80&w=1200",
+    description:
+      "Well-structured chapter-wise study resources to help you prepare with clarity and consistency.",
+  },
+  {
+    id: "pyq",
+    label: "PYQ",
+    icon: Pizza04Icon,
+    image:
+      "https://images.unsplash.com/photo-1455390582262-044cdead277a?q=80&w=1200",
+    description:
+      "Practice with previous year questions to understand exam pattern, difficulty, and smart solving strategy.",
   },
   {
     id: "senior-connect",
@@ -52,51 +68,6 @@ const FEATURES = [
       "https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=1200",
     description:
       "Each profile clearly shows exam background, rank, and student feedback for trust.",
-  },
-  {
-    id: "smart-search",
-    label: "Smart Search",
-    icon: AiCloudIcon,
-    image:
-      "https://images.unsplash.com/photo-1553877522-43269d4ea984?q=80&w=1200",
-    description:
-      "Quickly filter notes and seniors by exam, subject, and budget.",
-  },
-  {
-    id: "mobile-friendly",
-    label: "Mobile Friendly",
-    icon: SmartPhone01Icon,
-    image:
-      "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=1200",
-    description:
-      "Discover, book, and learn directly from your phone with a mobile-first experience.",
-  },
-  {
-    id: "recharge-plans",
-    label: "Recharge Plans",
-    icon: Pizza04Icon,
-    image:
-      "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?q=80&w=1200",
-    description:
-      "Choose affordable plans based on your needs and pay only for what you use.",
-  },
-  {
-    id: "bilingual-support",
-    label: "Hindi + English",
-    icon: CheckmarkCircle01Icon,
-    image:
-      "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?q=80&w=1200",
-    description:
-      "Understand concepts in your preferred language with support for both Hindi and English.",
-  },
-  {
-    id: "exam-tracks",
-    label: "Exam Tracks",
-    icon: MagicWandIcon,
-    image:
-      "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?q=80&w=1200",
-    description:
-      "Focused guidance paths for UPSC, JEE, NEET, Boards, and more categories.",
   },
 ];
 
@@ -297,11 +268,11 @@ export function FeatureCarousel() {
       <div className="sticky top-0 flex h-screen items-center px-4 py-8 md:px-8 md:py-10">
         <div className="mx-auto w-full max-w-7xl">
           <div className="relative flex min-h-[620px] flex-col overflow-hidden rounded-[2.5rem] border border-border/70 bg-card/80 shadow-[0_20px_80px_rgba(0,0,0,0.35)] backdrop-blur-sm lg:aspect-video lg:flex-row lg:rounded-[4rem]">
-            <div className="relative z-30 flex min-h-[360px] w-full flex-col items-start justify-center overflow-hidden bg-gradient-to-b from-card via-card/95 to-background px-8 pt-14 md:min-h-[460px] md:px-14 md:pt-20 lg:h-full lg:w-[40%] lg:pl-16 lg:pt-16">
+            <div className="relative z-30 flex min-h-[360px] w-full flex-col items-start justify-start overflow-hidden bg-gradient-to-b from-card via-card/95 to-background px-8 pt-14 md:min-h-[460px] md:px-14 md:pt-20 lg:h-full lg:w-[40%] lg:pl-16 lg:pt-16">
               <div className="absolute inset-x-0 top-0 z-40 h-14 bg-gradient-to-b from-card via-card/80 to-transparent md:h-20 lg:h-16" />
               <div className="absolute inset-x-0 bottom-0 z-40 h-14 bg-gradient-to-t from-background via-background/80 to-transparent md:h-20 lg:h-16" />
 
-              <div className="relative z-20 mb-8 mt-8 max-w-sm md:mt-10">
+              <div className="relative z-20 mb-6 mt-4 max-w-sm md:mt-6">
                 <p className="text-xs tracking-[0.3em] uppercase text-muted-foreground">
                   ApnaNotes Features
                 </p>
@@ -313,7 +284,7 @@ export function FeatureCarousel() {
                 </p>
               </div>
 
-              <div className="relative z-20 flex h-full w-full items-center justify-center lg:justify-start">
+              <div className="relative z-20 mt-12 flex h-[280px] w-full items-start justify-start overflow-hidden lg:mt-12 lg:h-[320px]">
                 {FEATURES.map((feature, index) => {
                   const isActive = index === currentIndex;
                   const distance = index - currentIndex;
